@@ -3,8 +3,9 @@ name: Update datasources from open events
 on:
   schedule:
     - cron: "*/10 * * * *"
-  branch:
-    - main
+  push:
+    branches:
+      - main
 
 jobs:
   update-issues:
@@ -33,7 +34,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add datastore
-          git commit -m "Update YAML datastores for new events" || echo "No changes to commit"
+          git commit -m "Update YAML datastores for new events [skip ci]" || echo "No changes to commit"
       
       - name: Push changes
         env:
