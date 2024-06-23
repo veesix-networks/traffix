@@ -32,11 +32,26 @@ body:
       placeholder: "25"
     validations:
       required: true
+  - type: datepicker
+    id: date
+    attributes:
+      label: Date
+      description: Estimated Date of release
+    validations:
+      required: true
   - type: input
     id: source
     attributes:
       label: Source
       description: Source of release and estimated size
       placeholder: https://some-cool-website.com/release-of-harry-plopper
+    validations:
+      required: true
+  - type: input
+    id: image
+    attributes:
+      label: Image
+      description: URL of relevant Image for the Game
+      placeholder: https://some-cool-website.com/release-of-harry-plopper/ding-dong-the-witch-never-existed.png
     validations:
       required: true

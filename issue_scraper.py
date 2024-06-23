@@ -1,6 +1,6 @@
 import os
 import requests
-from traffix.models.events import EventGameRelease
+from traffix.models.events import BaseEvent, EventGameRelease, EventEnum
 from pydantic import ValidationError
 import yaml
 import logging
@@ -50,26 +50,31 @@ def fetch_issues():
                 issue_ids.add(issue["id"])
 
 
-def validate_event_game_releases() -> None:
+def validate_event_game_releases() -> list[EventGameRelease]:
     """Processes an event_game_release issue.
 
     Args:
         issue:      GitHub Issue.
     """
+    events = []
     for issue in EVENTS.get("event_game_release"):
         body = issue["body"]
         pattern = r"### (.*?)\n(.*?)(?=\n### |\Z)"
         matches = re.findall(pattern, body, re.DOTALL)
-
         fields = {match[0].strip().lower(): match[1].strip() for match in matches}
+        fields["type"] = EventEnum.game_release
+        fields["github_issue_id"] = issue.get("number")
+
         try:
-            print(fields)
             event = EventGameRelease.model_validate(fields)
-        except ValidationError:
-            logger.error(f"Unable to validate Game Release '{fields.get('name')}'.")
+        except ValidationError as err:
+            logger.error(
+                f"Unable to validate Game Release '{fields.get('name')}'. Due to error:\n{err}"
+            )
             continue
 
-        print(event)
+        events.append(event)
+    return events
 
 
 def validate_gigabytes(number: str | int) -> int | None:
@@ -86,35 +91,44 @@ def validate_gigabytes(number: str | int) -> int | None:
     return number
 
 
-"""
 # Update YAML file with new issues
-def update_yaml_file(issues):
+def process_events(yaml_file: str, events: list[BaseEvent]):
     # Load existing YAML data
-    # with open(YAML_FILE, "r") as file:
-    #    data = yaml.safe_load(file)
+    data = []
 
-    # Update data with new issues
-    for issue in issues:
-        # Extract relevant data from the issue
-        print(json.dumps(issue, indent=4))
-        # issue_data = {
-        #    "title": issue["title"],
-        #    "url": issue["html_url"],
-        #    "created_at": issue["created_at"],
-        # }
-        # data["issues"].append(issue_data)
+    try:
+        with open(yaml_file, "r") as file:
+            data_loaded: list[BaseEvent] = yaml.safe_load(file)
+            if data_loaded:
+                data = data_loaded
+    except Exception as err:
+        logger.error(f"Unable to open YAML file {yaml_file} due to {err}")
+
+    names = [d.get("name") for d in data]
+    github_issue_ids = [d.get("github_issue_id") for d in data]
+
+    for event in events:
+        if event.name in names or event.github_issue_id in github_issue_ids:
+            logger.warning(
+                f"Event name and/or github issue ID is already in use: {event.name} ({event.github_issue_id})"
+            )
+            continue
+
+        data.append(event.model_dump())
 
     # Save the updated YAML file
-    # with open(YAML_FILE, "w") as file:
-    #    yaml.safe_dump(data, file)
-"""
+    with open(yaml_file, "w") as file:
+        yaml.safe_dump(data, file)
 
 
 def main():
     fetch_issues()
 
     # Process issues
-    validate_event_game_releases()
+    game_releases = validate_event_game_releases()
+
+    process_events("datastore/event_game_releases.yml", game_releases)
+    print(game_releases)
 
 
 if __name__ == "__main__":
