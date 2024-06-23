@@ -28,6 +28,14 @@ body:
     validations:
       required: true
   - type: input
+    id: date
+    attributes:
+      label: Date
+      description: Estimated Date of release
+      placeholder: 01/01/1990
+    validations:
+      required: true
+  - type: input
     id: source
     attributes:
       label: Source of update and estimated size

@@ -32,11 +32,12 @@ body:
       placeholder: "25"
     validations:
       required: true
-  - type: datepicker
+  - type: input
     id: date
     attributes:
       label: Date
       description: Estimated Date of release
+      placeholder: 01/01/1990
     validations:
       required: true
   - type: input

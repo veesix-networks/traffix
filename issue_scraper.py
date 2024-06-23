@@ -2,6 +2,7 @@ import os
 import requests
 from traffix.models.events import BaseEvent, EventGameRelease, EventEnum
 from pydantic import ValidationError
+from datetime import datetime
 import yaml
 import logging
 import re
@@ -15,6 +16,7 @@ EVENTS = {
     "event_game_release": [],
     "event_game_update": [],
 }
+DATE_FORMAT = "%d/%m/%Y"
 
 COMMUNITY_APPROVAL_TRIGGER = 1
 MAX_SIZE_BEFORE_MANUAL_APPROVAL = 250  # 250GB, games are quite big these days...
@@ -62,14 +64,26 @@ def validate_event_game_releases() -> list[EventGameRelease]:
         pattern = r"### (.*?)\n(.*?)(?=\n### |\Z)"
         matches = re.findall(pattern, body, re.DOTALL)
         fields = {match[0].strip().lower(): match[1].strip() for match in matches}
+        name = fields.get("name")
+
+        if not name:
+            logger.error("Unable to get name of Event")
+            continue
+
         fields["type"] = EventEnum.game_release
         fields["github_issue_id"] = issue.get("number")
+
+        try:
+            fields["date"] = datetime.strptime(fields["date"], DATE_FORMAT)
+        except Exception as err:
+            logger.error(f"Unable to validate date for '{name}' due to error: {err}")
+            continue
 
         try:
             event = EventGameRelease.model_validate(fields)
         except ValidationError as err:
             logger.error(
-                f"Unable to validate Game Release '{fields.get('name')}'. Due to error:\n{err}"
+                f"Unable to validate Game Release '{name}'. Due to error:\n{err}"
             )
             continue
 
