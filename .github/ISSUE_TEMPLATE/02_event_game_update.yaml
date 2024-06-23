@@ -24,7 +24,7 @@ body:
     attributes:
       label: Estimated size of Update in Gigabytes
       description: 
-      placeholder: 13
+      placeholder: "13"
     validations:
       required: true
   - type: input
