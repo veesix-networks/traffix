@@ -33,3 +33,31 @@
   size: 150
   source: https://www.ubisoft.com/en-gb/game/star-wars/outlaws
   type: game_release
+- date: 2024-11-15 00:00:00
+  github_issue_id: 10
+  image: https://upload.wikimedia.org/wikipedia/en/5/54/Assassin%27s_Creed_Shadows_cover.png
+  name: Assassin's Creed Shadows
+  size: 100
+  source: https://www.ubisoft.com/en-gb/game/assassins-creed/shadows
+  type: game_release
+- date: 2024-11-19 00:00:00
+  github_issue_id: 9
+  image: https://upload.wikimedia.org/wikipedia/en/3/3b/MSFS_24_logo.png
+  name: Microsoft Flight Simulator 2024
+  size: 150
+  source: https://flightsimulator.zendesk.com/hc/en-us/articles/360013463459-Minimum-Recommended-and-Ideal-PC-requirements-for-Microsoft-Flight-Simulator
+  type: game_release
+- date: 2024-09-08 00:00:00
+  github_issue_id: 8
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2124490/header.jpg
+  name: Silent Hill 2
+  size: 50
+  source: https://store.steampowered.com/app/2124490/SILENT_HILL_2/
+  type: game_release
+- date: 2024-08-09 00:00:00
+  github_issue_id: 7
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2183900/header.jpg
+  name: 'Warhammer 40,000: Space Marine 2'
+  size: 0
+  source: https://store.steampowered.com/app/2183900/Warhammer_40000_Space_Marine_2/
+  type: game_release
