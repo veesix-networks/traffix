@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from apscheduler.triggers.cron import CronTrigger
+from apscheduler.triggers.interval import IntervalTrigger
 from aioredis import from_url, Redis
 from structlog import get_logger
 import aiohttp
@@ -58,11 +58,11 @@ async def update_event_list_redis(datastore_file: str, redis_client: Redis) -> N
     file_sha = await fetch_latest_commit_sha(datastore_file)
 
     redis_event_sha = await redis_client.get(f"{key_normalized}_sha")
-    # if redis_event_sha:
-    #    redis_event_sha = redis_event_sha.decode("utf-8")
-    #    if redis_event_sha == file_sha:
-    #        logger.info("Commit SHA is the same, skipping sync for these events...")
-    #        return
+    if redis_event_sha:
+        redis_event_sha = redis_event_sha.decode("utf-8")
+        if redis_event_sha == file_sha:
+            logger.info("Commit SHA is the same, skipping sync for these events...")
+            return
 
     events = await fetch_yaml_from_github(datastore_file)
     total_events = len(events)
@@ -81,15 +81,16 @@ async def run_job():
         await client.ping()
     except Exception as err:
         logger.error(f"Unable to connect to Redis due to: {err}")
-        return
+        exit()
 
     await update_event_list_redis(settings.EVENT_GAME_RELEASES_YAML, client)
+    await update_event_list_redis(settings.EVENT_GAME_UPDATES_YAML, client)
 
 
 if __name__ == "__main__":
     scheduler = AsyncIOScheduler()
 
-    trigger = CronTrigger(minute=10)
+    trigger = IntervalTrigger(minutes=10)
 
     scheduler.add_job(run_job, trigger=trigger, id="sync_datastore")
     scheduler.start()

@@ -13,7 +13,6 @@ services:
     labels:
       caddy: demo.traffix.io
       caddy.reverse_proxy: "{{upstreams 80}}"
-      caddy.tls: internal
 
   traffix_worker:
     build:

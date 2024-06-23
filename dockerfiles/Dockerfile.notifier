@@ -3,10 +3,10 @@ FROM python:3.10-slim
 WORKDIR /app
 COPY requirements-worker.txt /app/
 
-RUN pip install -r requirements-worker.txt
+RUN pip install -r /app/requirements-worker.txt
 
 COPY . /app
 
 RUN pip install .
 
-CMD ["python", "traffix/worker/run.py"]
+CMD ["python", "traffix/worker/slack_notifier.py"]
