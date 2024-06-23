@@ -1,11 +1,12 @@
 name: Update datasources from open events
-
 on:
   schedule:
     - cron: "*/10 * * * *"
   push:
     branches:
       - main
+permissions:
+  contents: write
 
 jobs:
   update-issues:
