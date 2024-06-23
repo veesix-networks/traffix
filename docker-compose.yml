@@ -11,7 +11,7 @@ services:
       - redis
       - caddy
     labels:
-      caddy: demo.traffix.io
+      caddy: traffix.veesix-networks.co.uk
       caddy.reverse_proxy: "{{upstreams 80}}"
 
   traffix_worker:
