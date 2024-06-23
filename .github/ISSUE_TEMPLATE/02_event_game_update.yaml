@@ -1,0 +1,37 @@
+name: New Game Update
+description: Add a new Game Update Event to the database to be approved by the community / an administrator
+title: "[GAME_UPDATE]: "
+labels: ["event_game_update"]
+body:
+  - type: input
+    id: game
+    attributes:
+      label: Name of the Game
+      description: 
+      placeholder: Harry Plopper and the Gang of Bandits
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Update name/version
+      description: 
+      placeholder: v1.4.33+r1
+    validations:
+      required: true
+  - type: input
+    id: size
+    attributes:
+      label: Estimated size of Update in Gigabytes
+      description: 
+      placeholder: 13
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source of update and estimated size
+      description: 
+      placeholder: https://some-cool-website.com/release-of-harry-plopper-update-v1.4.33+r1
+    validations:
+      required: true

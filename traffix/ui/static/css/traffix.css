@@ -1,0 +1,15 @@
+@import url("http://fonts.googleapis.com/css?family=Orbitron:400,300,700");
+
+.card {
+    padding: 15px;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif !important;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: scale-down;
+}

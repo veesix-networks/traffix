@@ -1,0 +1,30 @@
+<!-- Sidebar Start (immediate child of the page wrapper) -->
+<nav class="sidebar offcanvas-start offcanvas-md" tabindex="-1" id="sidebar-example">
+    <div class="offcanvas-header border-bottom border-secondary border-opacity-25">
+      <a class="sidebar-brand" href="#">
+        Traffix
+      </a>
+    </div>
+    <div class="offcanvas-body">
+      <div class="mt-2 mb-3">
+        <input disabled type="text" class="form-control" placeholder="Search">
+      </div>
+      <ul class="sidebar-nav">
+        <li>
+          <h6 class="sidebar-header">Upcoming</h6>
+        </li>
+        <li><hr class="sidebar-divider"></li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'upcoming_game_releases' %}active{% endif %}" href="" aria-current="page">Game releases</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'upcoming_game_updates' %}active{% endif %}" href="" aria-current="page">Game updates</a>
+        </li>
+        <li><hr class="sidebar-divider"></li>
+        <li class="nav-item">
+          <a class="nav-link {% if active_page == 'upcoming_game_updates' %}active{% endif %}" href="" aria-current="page">Create request</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<!-- Sidebar end -->

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "traffix"
+version = "0.1.0"
+description = "Community driven attempt to predict bandwidth utilization throughout the day for major events such as game releases/updates, live entertainment, new films/series, political events, etc..."
+authors = ["Brandon Spendlove <brandon@veesix-networks.co.uk>"]
+license = "CC BY-NC"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.111.0"
+pydantic = "^2.7.4"
+pydantic-settings = "^2.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

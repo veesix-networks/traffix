@@ -1,0 +1,13 @@
+name: Generic Issue
+description: You have an issue which doesn't match any of the other issue templates.
+title: "[GENERIC]: "
+labels: ["generic"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: Your issue
+      description: 
+      placeholder: How do I raise an issue please?
+    validations:
+      required: true

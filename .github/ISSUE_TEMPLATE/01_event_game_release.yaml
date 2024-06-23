@@ -1,0 +1,42 @@
+name: New Game Release
+description: Add a new Game Release Event to the database to be approved by the community / an administrator
+title: "[GAME_RELEASE]: "
+labels: ["event_game_release"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name of the Game
+      description: 
+      placeholder: Harry Plopper and the Gang of Bandits
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which Platform(s) is this game being released on?
+      multiple: true
+      options:
+        - PC
+        - Xbox
+        - Playstation
+      default: 0
+    validations:
+      required: true
+  - type: input
+    id: size
+    attributes:
+      label: Estimated size of Game in Gigabytes
+      description: 
+      placeholder: 25
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source of release and estimated size
+      description: 
+      placeholder: https://some-cool-website.com/release-of-harry-plopper
+    validations:
+      required: true
