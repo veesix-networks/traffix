@@ -19,4 +19,4 @@ To prevent people randomly injecting false data into traffix, each event is rais
 
 ## Future plans
 
-The idea is to have a public API which can be used by the community to scrap the internet and provide bulk events. We would also love to provide an API to all the game distribution platforms in the future for them to send us a request to automatically update our datasources (or at least provide a basic API URL to poll to gather these events to generate graphs and inform the community via automated notifications via different medias like XML feeds, discord chat bots, etc.)
+The idea is to have a public API which can be used by the community to scrape the internet and provide bulk events. We would also love to provide an API to all the game distribution platforms in the future for them to send us a request to automatically update our datasources (or at least provide a basic API URL to poll to gather these events to generate graphs and inform the community via automated notifications via different medias like XML feeds, discord chat bots, etc.)
