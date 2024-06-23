@@ -23,6 +23,14 @@ services:
     volumes:
         - pgadmin:/root/.pgadmin
 
+  redis:
+    image: bitnami/redis:7.2.4
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis}
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+
 volumes:
   pgadmin:
   db:

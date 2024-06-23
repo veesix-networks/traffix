@@ -9,6 +9,10 @@ This project will be split into multiple phases during the development, here is 
 
 3) Integrations with public feeds, the idea here is to build potentially multiple workers (eg. A Steam worker that scrapes the Steam workshop API, and another worker for Microsoft to catch any Windows Updates, etc...)
 
+## Architecture
+
+![Basic Architecture](docs/img/basic_architecture.png)
+
 ## How to contribute a new event
 
 To prevent people randomly injecting false data into traffix, each event is raised as an issue and then approved by the community or an administrator. Use the [issues](https://github.com/veesix-networks/traffix/issues) tab in GitHub and select the correct template when you create an issue, provide the evidence of the event and if an administrator is too slow to approve the request, the community can approve by giving the original issue a 🚀 (rocket) emoji reaction, once it reaches a certain amount of thumbs up then it will automatically be approved.

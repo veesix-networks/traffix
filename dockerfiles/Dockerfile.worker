@@ -1,0 +1,13 @@
+FROM python:3.10-slim
+
+ARG NETWORK_MODULES_TOKEN
+
+# Cache dependencies in Docker
+WORKDIR /app
+COPY requirements-worker.txt /app/
+
+RUN pip install -r requirements-worker.txt
+
+COPY . /app
+
+CMD ["python", "/traffix/run.py"]

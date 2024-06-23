@@ -22,3 +22,9 @@ templates = Jinja2Templates(directory="traffix/ui/templates")
 @app.get("/")
 async def home(request: Request):
     return templates.TemplateResponse(request=request, name="pages/index.html")
+
+
+# Views
+from traffix.views.all import router
+
+app.include_router(router)

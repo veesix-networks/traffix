@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+<div class="content">
+    <h1 class="content-title font-size-22 text-center">
+        Game Releases
+    </h1>
+    {% if game_releases %}
+            {% for i in range(0, game_releases|length, 5) %}
+                <div class="row">
+                    {% for game in game_releases[i:i+5] %}
+                        <div class="col-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ game.name }}</h5>
+                                    <p class="card-text"><strong><a href="{{ game.source }}">Source</a></strong></p>
+                                    <p class="card-text"><strong>Size (estimated): </strong>{% if game.size %}{{ game.size }}GB{% else %}N/A{% endif %}</p>
+                                    <p class="card-text"><strong>Release Date (estimated): </strong>{{ game.date }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    <div class="pagination text-center mt-3">
+        <nav aria-label="Pagination">
+            <ul class="pagination">
+                {% if current_page > 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?offset={{ (current_page - 2) * max_per_page }}&limit={{ limit }}">Previous</a>
+                    </li>
+                {% endif %}
+                {% for page in range(1, total_pages + 1) %}
+                    <li class="page-item {% if page == current_page %}active{% endif %}">
+                        <a class="page-link" href="?offset={{ (page - 1) * max_per_page }}&limit={{ limit }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+                {% if current_page < total_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="?offset={{ current_page * max_per_page }}&limit={{ limit }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

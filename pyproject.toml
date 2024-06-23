@@ -11,7 +11,13 @@ python = "^3.10"
 fastapi = "^0.111.0"
 pydantic = "^2.7.4"
 pydantic-settings = "^2.3.3"
+aioredis = "^2.0.1"
+structlog = "^24.2.0"
 
+
+[tool.poetry.group.worker.dependencies]
+apscheduler = "^3.10.4"
+aiohttp = "^3.9.5"
 
 [build-system]
 requires = ["poetry-core"]

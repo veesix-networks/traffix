@@ -25,6 +25,28 @@ MAX_SIZE_BEFORE_MANUAL_APPROVAL = 250  # 250GB, games are quite big these days..
 GITHUB_API_URL = f"https://api.github.com/repos/{OWNER}/{REPO}/issues"
 
 
+def comment_and_close_issue(issue_number: int, comment: str):
+    headers = {
+        "Authorization": f"token {os.getenv('GITHUB_TOKEN')}",
+        "Accept": "application/vnd.github.v3+json",
+    }
+    comment_url = (
+        f"https://api.github.com/repos/{OWNER}/{REPO}/issues/{issue_number}/comments"
+    )
+    close_url = f"https://api.github.com/repos/{OWNER}/{REPO}/issues/{issue_number}"
+
+    # Add a comment
+    response = requests.post(comment_url, headers=headers, json={"body": comment})
+    response.raise_for_status()
+
+    # Close the issue
+    close_payload = {"state": "closed"}
+    response = requests.patch(close_url, headers=headers, json=close_payload)
+    response.raise_for_status()
+
+    logger.info(f"Issue {issue_number} commented and closed successfully.")
+
+
 # Fetch issues from GitHub
 def fetch_issues():
     headers = {"Authorization": f"token {os.getenv('GITHUB_TOKEN')}"}
@@ -133,6 +155,13 @@ def process_events(yaml_file: str, events: list[BaseEvent]):
     # Save the updated YAML file
     with open(yaml_file, "w") as file:
         yaml.safe_dump(data, file)
+
+    # Loop after YAML file has been saved
+    for event in events:
+        comment_and_close_issue(
+            issue_number=event.github_issue_id,
+            comment=f"Thank you for your contribution! 🎉\n\nThis event was processed successfully and added to the relevant YAML datastore ({yaml_file}).",
+        )
 
 
 def main():
