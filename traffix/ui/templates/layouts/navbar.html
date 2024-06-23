@@ -13,13 +13,13 @@
             Upcoming
           </a>
           <ul class="dropdown-menu mt-lg-2 rounded-top-0">
-            <li><a class="dropdown-item {% if active_page == 'event_game_release' %}active{% endif %}" href="">Game Releases</a></li>
-            <li><a class="dropdown-item {% if active_page == 'event_game_update' %}active{% endif %}" href="">Game Updates</a></li>
-            <li><a class="dropdown-item {% if active_page == 'event_sports' %}active{% endif %}" href="">Sports</a></li>
-            <li><a class="dropdown-item {% if active_page == 'event_film_series' %}active{% endif %}" href="">Film / Series</a></li>
-            <li><a class="dropdown-item {% if active_page == 'event_other' %}active{% endif %}" href="">Other</a></li>
+            <li><a class="dropdown-item {% if active_page == 'event_game_release' %}active{% endif %}" href="{{ url_for('get_game_releases') }}">Game Releases</a></li>
+            <li><a class="dropdown-item {% if active_page == 'event_game_update' %}active{% endif %} disabled" href="">Game Updates</a></li>
+            <li><a class="dropdown-item {% if active_page == 'event_sports' %}active{% endif %} disabled" href="">Sports</a></li>
+            <li><a class="dropdown-item {% if active_page == 'event_film_series' %}active{% endif %} disabled" href="">Film / Series</a></li>
+            <li><a class="dropdown-item {% if active_page == 'event_other' %}active{% endif %} disabled" href="">Other</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item {% if active_page == 'create_request' %}active{% endif %}" href="">Create Request</a></li>
+            <li><a class="dropdown-item {% if active_page == 'create_request' %}active{% endif %}" href="https://github.com/veesix-networks/traffix/issues/new/choose" target="_blank">Request</a></li>
           </ul>
         </li>
         <li class="nav-item">

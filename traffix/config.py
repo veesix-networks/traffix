@@ -1,7 +1,21 @@
+from pydantic import RedisDsn
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    # Run Job now
+    RUN_NOW: bool = True
+
+    # GitHub Repo
+    GITHUB_REPO: str = "veesix-networks/traffix"
+
+    # YAML Files
+    EVENT_GAME_RELEASES_YAML: str = "event_game_releases.yml"
+    EVENT_GAME_UPDATES_YAML: str = "event_game_updates.yml"
+
+    # REDIS
+    REDIS: RedisDsn = "redis://default:redis@localhost:6379"
+
     # Database URI
     DATABASE_URI: str = "postgresql+asyncpg://postgres:example@localhost:5432/traffix"
 

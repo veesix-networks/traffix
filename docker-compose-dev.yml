@@ -1,28 +1,10 @@
 version: "3.8"
 
 services:
-  db:
-    image: postgres
-    restart: always
+  redis:
+    image: bitnami/redis:7.2.4
     environment:
-      POSTGRES_DB: traffix
-      POSTGRES_PASSWORD: example
-    volumes:
-      - db:/var/lib/postgresql
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis}
     ports:
-      - 5432:5432
-    
-
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: example@email.com
-      PGADMIN_DEFAULT_PASSWORD: example
-    ports:
-      - 8000:80
-    volumes:
-        - pgadmin:/root/.pgadmin
-
-volumes:
-  pgadmin:
-  db:
+      - 6379:6379
+    restart: unless-stopped
