@@ -6,8 +6,8 @@ body:
   - type: input
     id: name
     attributes:
-      label: Name of the Game
-      description: 
+      label: Name
+      description: Name of the game 
       placeholder: Harry Plopper and the Gang of Bandits
     validations:
       required: true
@@ -27,16 +27,16 @@ body:
   - type: input
     id: size
     attributes:
-      label: Estimated size of Game in Gigabytes
-      description: 
+      label: Size
+      description: Estimated size of the game in gigabytes
       placeholder: "25"
     validations:
       required: true
   - type: input
     id: source
     attributes:
-      label: Source of release and estimated size
-      description: 
+      label: Source
+      description: Source of release and estimated size
       placeholder: https://some-cool-website.com/release-of-harry-plopper
     validations:
       required: true
