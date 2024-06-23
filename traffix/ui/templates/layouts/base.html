@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Traffix</title>
+    {% endif %}
+
+    {% block head %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/halfmoon.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/traffix.css') }}">
+</head>
+
+<body class="position-relative" data-bs-theme="dark" data-autohide="true" data-delay="5000">
+    {% block navbar %}
+        {% include "layouts/navbar.html" %}
+    {% endblock %}
+
+    <div class="container-fluid pt-3">
+        <div id="alerts" class="d-inline justify-content-center"></div>
+
+        {% block content %}{% endblock %}
+        {% if errors %}
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            {% for error in errors %}
+            <div class="toast fade show text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">{{ error.title }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                {{ error.text }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
