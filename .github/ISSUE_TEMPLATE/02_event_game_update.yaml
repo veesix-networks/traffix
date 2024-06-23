@@ -4,26 +4,26 @@ title: "[GAME_UPDATE]: "
 labels: ["event_game_update"]
 body:
   - type: input
-    id: game
+    id: name
     attributes:
-      label: Name of the Game
-      description: 
+      label: Name
+      description: Name of the Game
       placeholder: Harry Plopper and the Gang of Bandits
     validations:
       required: true
   - type: input
-    id: name
+    id: version
     attributes:
-      label: Update name/version
-      description: 
+      label: Version
+      description: Version of the Update
       placeholder: v1.4.33+r1
     validations:
       required: true
   - type: input
     id: size
     attributes:
-      label: Estimated size of Update in Gigabytes
-      description: 
+      label: Size
+      description: Estimated size of Update in Gigabytes
       placeholder: "13"
     validations:
       required: true
@@ -38,8 +38,8 @@ body:
   - type: input
     id: source
     attributes:
-      label: Source of update and estimated size
-      description: 
+      label: Source
+      description: Source of update and estimated size
       placeholder: https://some-cool-website.com/release-of-harry-plopper-update-v1.4.33+r1
     validations:
       required: true

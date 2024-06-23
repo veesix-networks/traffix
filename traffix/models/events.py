@@ -23,3 +23,9 @@ class EventGameRelease(BaseEvent):
     size: Annotated[int, Field(lt=250)]
     source: str
     image: Annotated[str, Field(max_length=256)]
+
+
+class EventGameUpdate(BaseEvent):
+    version: str
+    size: Annotated[int, Field(lt=250)]
+    source: str

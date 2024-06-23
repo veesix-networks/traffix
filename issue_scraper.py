@@ -1,6 +1,11 @@
 import os
 import requests
-from traffix.models.events import BaseEvent, EventGameRelease, EventEnum
+from traffix.models.events import (
+    BaseEvent,
+    EventGameRelease,
+    EventGameUpdate,
+    EventEnum,
+)
 from pydantic import ValidationError
 from datetime import datetime
 import yaml
@@ -18,7 +23,7 @@ EVENTS = {
 }
 DATE_FORMAT = "%d/%m/%Y"
 
-COMMUNITY_APPROVAL_TRIGGER = 1
+COMMUNITY_APPROVAL_TRIGGER = 10
 MAX_SIZE_BEFORE_MANUAL_APPROVAL = 250  # 250GB, games are quite big these days...
 
 # GitHub API URL to fetch issues
@@ -74,12 +79,43 @@ def fetch_issues():
                 issue_ids.add(issue["id"])
 
 
-def validate_event_game_releases() -> list[EventGameRelease]:
-    """Processes an event_game_release issue.
+def validate_event_game_updates() -> list[EventGameUpdate]:
+    """Process an event_game_update issue."""
+    events = []
+    for issue in EVENTS.get("event_game_update"):
+        body = issue["body"]
+        pattern = r"### (.*?)\n(.*?)(?=\n### |\Z)"
+        matches = re.findall(pattern, body, re.DOTALL)
+        fields = {match[0].strip().lower(): match[1].strip() for match in matches}
+        name = fields.get("name")
 
-    Args:
-        issue:      GitHub Issue.
-    """
+        if not name:
+            logger.error("Unable to get name of Event")
+            continue
+
+        fields["type"] = EventEnum.game_update
+        fields["github_issue_id"] = issue.get("number")
+
+        try:
+            fields["date"] = datetime.strptime(fields["date"], DATE_FORMAT)
+        except Exception as err:
+            logger.error(f"Unable to validate date for '{name}' due to error: {err}")
+            continue
+
+        try:
+            event = EventGameUpdate.model_validate(fields)
+        except ValidationError as err:
+            logger.error(
+                f"Unable to validate Game Release '{name}'. Due to error:\n{err}"
+            )
+            continue
+
+        events.append(event)
+    return events
+
+
+def validate_event_game_releases() -> list[EventGameRelease]:
+    """Processes an event_game_release issue."""
     events = []
     for issue in EVENTS.get("event_game_release"):
         body = issue["body"]
@@ -160,7 +196,7 @@ def process_events(yaml_file: str, events: list[BaseEvent]):
     for event in events:
         comment_and_close_issue(
             issue_number=event.github_issue_id,
-            comment=f"Thank you for your contribution! 🎉\n\nThis event was processed successfully and added to the relevant YAML datastore ({yaml_file}).",
+            comment=f"Thank you for your contribution! 🎉\n\nThis event was processed successfully and added to the relevant YAML datastore `{yaml_file}`.",
         )
 
 
@@ -169,9 +205,10 @@ def main():
 
     # Process issues
     game_releases = validate_event_game_releases()
+    game_updates = validate_event_game_updates()
 
     process_events("datastore/event_game_releases.yml", game_releases)
-    print(game_releases)
+    process_events("datastore/event_game_updates.yml", game_updates)
 
 
 if __name__ == "__main__":
