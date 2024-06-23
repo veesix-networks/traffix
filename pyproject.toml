@@ -18,6 +18,7 @@ structlog = "^24.2.0"
 [tool.poetry.group.worker.dependencies]
 apscheduler = "^3.10.4"
 aiohttp = "^3.9.5"
+slack-sdk = "^3.30.0"
 
 [build-system]
 requires = ["poetry-core"]

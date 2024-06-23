@@ -14,7 +14,7 @@
           </a>
           <ul class="dropdown-menu mt-lg-2 rounded-top-0">
             <li><a class="dropdown-item {% if active_page == 'event_game_release' %}active{% endif %}" href="{{ url_for('get_game_releases') }}">Game Releases</a></li>
-            <li><a class="dropdown-item {% if active_page == 'event_game_update' %}active{% endif %} disabled" href="">Game Updates</a></li>
+            <li><a class="dropdown-item {% if active_page == 'event_game_update' %}active{% endif %}" href="{{ url_for('get_game_updates') }}">Game Updates</a></li>
             <li><a class="dropdown-item {% if active_page == 'event_sports' %}active{% endif %} disabled" href="">Sports</a></li>
             <li><a class="dropdown-item {% if active_page == 'event_film_series' %}active{% endif %} disabled" href="">Film / Series</a></li>
             <li><a class="dropdown-item {% if active_page == 'event_other' %}active{% endif %} disabled" href="">Other</a></li>

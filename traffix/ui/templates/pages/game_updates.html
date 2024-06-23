@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+<div class="content">
+    <h1 class="content-title font-size-22 text-center mb-4">
+        Game Updates
+    </h1>
+    {% if game_updates %}
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4">
+        {% for game in game_updates %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ game.name }} - {{ game.version }} (<a href="https://github.com/veesix-networks/traffix/issues/{{ game.github_issue_id}}" target="_blank">#{{ game.github_issue_id }}</a>)</h5>
+                    <div class="card-text">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Size (estimated)</th>
+                                        <td>{% if game.size %}{{ game.size }}GB{% else %}N/A{% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Release Date (estimated)</th>
+                                        <td>{{ game.date }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% if game.image %}
+                        <div class="image-container" style="width: 100%; height: 200px; overflow: hidden; position: relative;">
+                            <a href="{{ game.source }}" target="_blank">
+                                <img src="{{ game.image }}" class="card-img-top" style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            </a>
+                        </div>
+                    
+                    {% else %}
+                        <div class="card-img-top" style="width: 100%; height: 200px; object-fit: cover; object-position: center; background-color: #f0f0f0;"></div>
+                    {% endif %}
+                </div>
+        </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        {% endif %}
+
+    {% include "fragments/generic_pagination.html" %}
+</div>
+{% endblock %}
