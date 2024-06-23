@@ -22,4 +22,4 @@ class BaseEvent(BaseModel):
 class EventGameRelease(BaseEvent):
     size: Annotated[int, Field(lt=250)]
     source: str
-    image: Annotated[str, Field(max_length=128)]
+    image: Annotated[str, Field(max_length=256)]
