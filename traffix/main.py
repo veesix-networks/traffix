@@ -36,7 +36,9 @@ async def home(request: Request, redis: RedisDep):
         "appSidebarHide": 1,
         "sidebar_menu": sidebar_menu,
         "fake_data": FAKE_TOP_EVENTS,
-        "top_50_game_releases": top_50_game_releases[:5],
+        "top_50_game_releases": top_50_game_releases[:5]
+        if top_50_game_releases
+        else [],
     }
 
     return templates.TemplateResponse(
