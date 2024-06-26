@@ -1,0 +1,67 @@
+<!-- BEGIN col-6 -->
+<div class="col-xl-6">
+    <!-- BEGIN card -->
+    <div class="card mb-3">
+        <!-- BEGIN card-body -->
+        <div class="card-body">
+            <!-- BEGIN title -->
+            <div class="d-flex fw-bold small mb-3">
+                <span class="flex-grow-1">TOP EVENTS</span>
+                <a href="#" data-toggle="card-expand" class="text-inverse text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+            </div>
+            <!-- END title -->
+            <!-- BEGIN table -->
+            <div class="table-responsive">
+                <table class="w-100 mb-0 small align-middle text-nowrap">
+                    <tbody>
+                        {% for item in top_50_game_releases %}
+                        <tr>
+                            <td>
+                                <div class="d-flex">
+                                    <div class="position-relative mb-2">
+
+                                    </div>
+                                    <div class="flex-1 ps-3">
+                                        <div class="mb-1"><small class="fs-9px fw-500 lh-1 d-inline-block rounded-0 badge bg-secondary bg-opacity-25 text-inverse text-opacity-75 pt-5px">type: {{ item.type }}</small></div>
+                                        <div class="fw-500 text-inverse">{{ item.name }}</div>
+                                        Created by: <a href="#">{{ item.created_by }}</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <table class="mb-2">
+                                    <tr>
+                                        <td class="pe-3">SIZE:</td>
+                                        <td class="text-inverse text-opacity-75 fw-500">{{ item.size }} GB</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pe-3">GITHUB:</td>
+                                        <td class="text-inverse text-opacity-75 fw-500"><a href="#">Issue #{{ item.github_issue_id }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pe-3 text-nowrap">DATE:</td>
+                                        <td class="text-inverse text-opacity-75 fw-500">{{ item.date }}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- END table -->
+        </div>
+        <!-- END card-body -->
+        
+        <!-- BEGIN card-arrow -->
+        <div class="card-arrow">
+            <div class="card-arrow-top-left"></div>
+            <div class="card-arrow-top-right"></div>
+            <div class="card-arrow-bottom-left"></div>
+            <div class="card-arrow-bottom-right"></div>
+        </div>
+        <!-- END card-arrow -->
+    </div>
+    <!-- END card -->
+</div>
+<!-- END col-6 -->

@@ -10,7 +10,12 @@ import aiohttp
 import yaml
 
 from traffix.config import settings
-from traffix.models.events import BaseEvent
+from traffix.models.events import (
+    BaseEvent,
+    EventGameRelease,
+    EventGameUpdate,
+    EventEnum,
+)
 
 logger = get_logger()
 
@@ -49,7 +54,9 @@ async def fetch_yaml_from_github(yaml_file: str) -> str:
     return data
 
 
-async def update_event_list_redis(datastore_file: str, redis_client: Redis) -> None:
+async def update_event_list_redis(
+    client: Redis, datastore_file: str
+) -> list[BaseEvent | EventGameRelease | EventGameUpdate]:
     key_normalized = (
         datastore_file.split(".")[0].lower().replace("-", "_").replace(" ", "_")
     )
@@ -66,11 +73,44 @@ async def update_event_list_redis(datastore_file: str, redis_client: Redis) -> N
 
     events = await fetch_yaml_from_github(datastore_file)
     total_events = len(events)
-    await redis_client.set(f"{key_normalized}_sha", file_sha)
-    await redis_client.set(key_normalized, json.dumps(events, default=str))
-    await redis_client.set(f"{key_normalized}_len", total_events)
+    await client.set(f"{key_normalized}_sha", file_sha)
+    await client.set(key_normalized, json.dumps(events, default=str))
+    await client.set(f"{key_normalized}_len", total_events)
 
     logger.info(f"Updated {key_normalized}")
+    return events
+
+
+async def update_latest_50_event_list_redis(
+    client: Redis, events: list[BaseEvent], event_type: EventEnum
+) -> None:
+    """Updates Redis with the latest 50 events coming out based on the provided events.
+
+    Args:
+        client:         Redis client.
+        events:         List of events.
+        event_type:     EventEnum.
+    """
+    if not events:
+        return
+
+    if not isinstance(event_type, EventEnum):
+        logger.warning(f"'{event_type}' is not a valid event type")
+        return
+
+    now = datetime.now()
+
+    filtered_objects = [obj for obj in events if obj["date"] >= now]
+
+    # Sort filtered objects by datetime in ascending order
+    sorted_objects = sorted(filtered_objects, key=lambda obj: obj["date"])
+
+    # Retrieve top 50 items
+    top_50_events = sorted_objects[:50]
+    await client.set(
+        f"top_50_{event_type.value}", json.dumps(top_50_events, default=str)
+    )
+    return top_50_events
 
 
 async def run_job():
@@ -83,8 +123,18 @@ async def run_job():
         logger.error(f"Unable to connect to Redis due to: {err}")
         exit()
 
-    await update_event_list_redis(settings.EVENT_GAME_RELEASES_YAML, client)
-    await update_event_list_redis(settings.EVENT_GAME_UPDATES_YAML, client)
+    game_releases = await update_event_list_redis(
+        client, settings.EVENT_GAME_RELEASES_YAML
+    )
+    game_updates = await update_event_list_redis(
+        client, settings.EVENT_GAME_UPDATES_YAML
+    )
+
+    # Set top 50 for various redis queues
+    await update_latest_50_event_list_redis(
+        client, game_releases, EventEnum.game_release
+    )
+    await update_latest_50_event_list_redis(client, game_updates, EventEnum.game_update)
 
 
 if __name__ == "__main__":

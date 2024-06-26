@@ -70,10 +70,11 @@ def fetch_issues():
                 name = issue.get("title")
                 plus_one = issue["reactions"].get("rocket")
                 if plus_one < COMMUNITY_APPROVAL_TRIGGER:
-                    logger.warning(
-                        f"Skipping Issue '{name}' due to low community approval..."
-                    )
-                    continue
+                    if issue.get("user", {}).get("id") != 8687668:
+                        logger.warning(
+                            f"Skipping Issue '{name}' due to low community approval... Brandon also overules everything... :)"
+                        )
+                        continue
 
                 EVENTS[label].append(issue)
                 issue_ids.add(issue["id"])

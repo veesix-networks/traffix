@@ -1,0 +1,38 @@
+<!-- BEGIN #top-nav -->
+<div id="top-nav" class="app-top-nav">
+	<!-- BEGIN menu -->
+	<div class="menu">
+		{% for menu in sidebar_menu %}
+			{% if not menu.is_header and not menu.is_divider %}
+				<div class="menu-item {% if menu.children %} has-sub {% endif %} {% if menu.is_active %} active {% endif %}">
+					<a href="{{ menu.url }}" class="menu-link" {% if menu.target %}target="{{ menu.target }}"{% endif %}>
+						<span class="menu-icon"><i class="{{ menu.icon }}"></i></span>
+						<span class="menu-text">{{ menu.text }}</span>
+						{% if menu.children %}
+							<span class="menu-caret"><b class="caret"></b></span>
+						{% endif %}
+					</a>
+					{% if menu.children %}
+						<div class="menu-submenu">
+							{% for children in menu.children %}
+								<div class="menu-item {% if children.is_active %} active {% endif %}">
+									<a href="{{ children.url }}" class="menu-link" {% if menu.target %}target="{{ menu.target }}"{% endif %}>
+										<span class="menu-text">{{ children.text }}</span>
+									</a>
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			{% endif %}
+		{% endfor %}
+		<div class="menu-item menu-control menu-control-start">
+			<a href="javascript:;" class="menu-link" data-toggle="app-top-menu-prev"><i class="bi bi-caret-left"></i></a>
+		</div>
+		<div class="menu-item menu-control menu-control-end">
+			<a href="javascript:;" class="menu-link" data-toggle="app-top-menu-next"><i class="bi bi-caret-right"></i></a>
+		</div>
+	</div>
+	<!-- END menu -->
+</div>
+<!-- END #top-nav -->
