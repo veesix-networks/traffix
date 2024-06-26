@@ -64,12 +64,12 @@ async def update_event_list_redis(
     logger.info(f"Validating and checking: '{key_normalized}'")
     file_sha = await fetch_latest_commit_sha(datastore_file)
 
-    # redis_event_sha = await client.get(f"{key_normalized}_sha")
-    # if redis_event_sha:
-    #    redis_event_sha = redis_event_sha.decode("utf-8")
-    #    if redis_event_sha == file_sha:
-    #        logger.info("Commit SHA is the same, skipping sync for these events...")
-    #        return
+    redis_event_sha = await redis_client.get(f"{key_normalized}_sha")
+    if redis_event_sha:
+        redis_event_sha = redis_event_sha.decode("utf-8")
+        if redis_event_sha == file_sha:
+            logger.info("Commit SHA is the same, skipping sync for these events...")
+            return
 
     events = await fetch_yaml_from_github(datastore_file)
     total_events = len(events)
@@ -130,7 +130,6 @@ async def run_job():
         client, settings.EVENT_GAME_UPDATES_YAML
     )
 
-    print(game_releases)
     # Set top 50 for various redis queues
     await update_latest_50_event_list_redis(
         client, game_releases, EventEnum.game_release
