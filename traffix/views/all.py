@@ -3,6 +3,7 @@ from math import ceil
 
 from traffix.dependencies import RedisDep
 from traffix.main import templates
+from traffix.menu import sidebar_menu
 
 router = APIRouter()
 
@@ -28,15 +29,18 @@ async def get_game_releases(
     if limit > 0:
         paginated_game_releases = paginated_game_releases[:limit]
 
+    context = {
+        "game_releases": paginated_game_releases,
+        "current_page": current_page,
+        "total_pages": total_pages,
+        "limit": limit,
+        "appTopNav": 1,
+        "appSidebarHide": 1,
+        "sidebar_menu": sidebar_menu,
+    }
+
     return templates.TemplateResponse(
-        request=request,
-        name="pages/game_releases.html",
-        context={
-            "game_releases": paginated_game_releases,
-            "current_page": current_page,
-            "total_pages": total_pages,
-            "limit": limit,
-        },
+        request=request, name="pages/game_releases_new.html", context=context
     )
 
 

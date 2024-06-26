@@ -1,0 +1,44 @@
+<!-- BEGIN #sidebar -->
+<div id="sidebar" class="app-sidebar">
+	<!-- BEGIN scrollbar -->
+	<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+		<!-- BEGIN menu -->
+		<div class="menu">
+			{% for menu in sidebar_menu %}
+				{% if menu.is_header %}
+					<div class="menu-header">{{ menu.text }}</div>
+				{% elif menu.is_divider %}
+					<div class="menu-divider"></div>
+				{% else %}
+					<div class="menu-item {% if menu.children %} has-sub {% endif %} {% if menu.is_active %} active {% endif %}">
+						<a href="{{ menu.url }}" class="menu-link {% if menu.disabled %}disabled{% endif %}">
+							<span class="menu-icon"><i class="{{ menu.icon }}"></i></span>
+							<span class="menu-text">{{ menu.text }}</span>
+							{% if menu.children %}
+								<span class="menu-caret"><b class="caret"></b></span>
+							{% endif %}
+						</a>
+						{% if menu.children %}
+							<div class="menu-submenu">
+								{% for children in menu.children %}
+									<div class="menu-item {% if children.is_active %} active {% endif %}">
+										<a href="{{ children.url }}" class="menu-link {% if menu.disabled %}disabled{% endif %}">
+											<span class="menu-text">{{ children.text }}</span>
+										</a>
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<!-- END menu -->
+	</div>
+	<!-- END scrollbar -->
+</div>
+<!-- END #sidebar -->
+	
+<!-- BEGIN mobile-sidebar-backdrop -->
+<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+<!-- END mobile-sidebar-backdrop -->

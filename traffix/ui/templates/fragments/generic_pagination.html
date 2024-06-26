@@ -1,6 +1,7 @@
-<div class="pagination text-center mt-3">
-    <nav aria-label="Pagination">
-        <ul class="pagination">
+<div class="d-flex">
+    <div id="paginate" class="mb-2 ms-auto">
+        <div class="row justify-content-center">
+            <ul class="pagination mb-0">
             {% if current_page > 1 %}
                 <li class="page-item">
                     <a class="page-link" href="?offset={{ (current_page - 2) * limit }}&limit={{ limit }}">Previous</a>
@@ -16,6 +17,7 @@
                     <a class="page-link" href="?offset={{ current_page * limit }}&limit={{ limit }}">Next</a>
                 </li>
             {% endif %}
-        </ul>
-    </nav>
+            </ul>
+        </div>
+    </div>
 </div>

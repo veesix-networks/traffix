@@ -1,0 +1,42 @@
+FAKE_TOP_EVENTS = [
+    {
+        "name": "Frostpunk 2",
+        "type": "game_release",
+        "created_by": "somerando",
+        "size": 129,
+        "github_issue_id": 23,
+        "date": "2024-07-25 08:00:00 UTC",
+    },
+    {
+        "name": "F1 Manager 2024",
+        "type": "game_release",
+        "created_by": "eokdk",
+        "size": 30,
+        "github_issue_id": 44,
+        "date": "2024-07-23 13:00:00 UTC",
+    },
+    {
+        "name": "Prison Architect 2",
+        "type": "game_release",
+        "created_by": "jumbomumbo",
+        "size": 12,
+        "github_issue_id": 11,
+        "date": "2024-08-03 18:00:00 UTC",
+    },
+    {
+        "name": "Earth Defense Force 6",
+        "type": "game_release",
+        "created_by": "getaloadofthisguy",
+        "size": 27,
+        "github_issue_id": 87,
+        "date": "2024-07-25 19:00:00 UTC",
+    },
+    {
+        "name": "Fortnite v3.0.11 patch",
+        "type": "game_update",
+        "created_by": "flossyboi",
+        "size": 231,
+        "github_issue_id": 69,
+        "date": "2024-08-09 03:00:00 UTC",
+    },
+]

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" {% block htmlAttr %}{% endblock %}>
+<head>
+	<meta charset="utf-8">
+	<title>HUD | {% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="{{ url_for('static', path='css/vendor.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', path='css/app.min.css') }}" rel="stylesheet">
+	<!-- ================== END core-css ================== -->
+	
+	{% block css %}{% endblock %}
+</head>
+<body class="{{ bodyClass }}{% if appHeaderHide %} pace-top {% endif %}" {{ bodyAttr }}>
+	<div id="app" class="app 
+		{% if appSidebarHide %}app-without-sidebar{% endif %}
+		{% if appSidebarCollapsed %}app-sidebar-collapsed{% endif %}
+		{% if appHeaderHide %}app-without-header{% endif %}
+		{% if appTopNav %}app-with-top-nav{% endif %}
+		{% if appContentFullHeight %}app-content-full-height{% endif %}
+		{% if appFooter %}app-fixed-footer{% endif %}
+		{% if appBoxedLayout %}app-boxed-layout{% endif %}
+	">
+		{% if not appHeaderHide %}
+			{% include 'partial/header.html' %}
+		{% endif %}
+		
+		{% if not appSidebarHide %}
+			{% include 'partial/sidebar.html' %}
+		{% endif %}
+		
+		{% if appTopNav %}
+			{% include 'partial/top-nav.html' %}
+		{% endif %}
+		
+		<div class="app-content {{ appContentClass }}">
+			{% block content %}{% endblock %}
+		</div>
+		
+		{% if appFooter %}
+			{% include 'partial/footer.html' %}
+		{% endif %}
+	</div>
+
+	{% include 'partial/scroll-top-btn.html' %} 
+	
+	{% block outter_content %}{% endblock %}
+
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="{{ url_for('static', path='js/vendor.min.js') }}"></script>
+	<script src="{{ url_for('static', path='js/app.min.js') }}"></script>
+	<!-- ================== END core-js ================== -->
+	
+	{% block scripts %}{% endblock %}
+</body>
+</html>
