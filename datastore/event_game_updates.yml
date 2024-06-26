@@ -1,1 +1,14 @@
-[]
+- date: 2024-06-26 00:00:00
+  github_issue_id: 13
+  name: Call of Duty Warzone
+  size: 23
+  source: https://www.callofduty.com/blog/2024/06/call-of-duty-modern-warfare-iii-warzone-wzm-season-4-reloaded-maps-modes-zombies-announcement
+  type: game_update
+  version: Season 4 Reloaded
+- date: 2024-06-22 00:00:00
+  github_issue_id: 11
+  name: Fortnite
+  size: 13
+  source: https://dev.epicgames.com/documentation/en-us/uefn/30-20-release-notes-in-unreal-editor-for-fortnite
+  type: game_update
+  version: v30.20

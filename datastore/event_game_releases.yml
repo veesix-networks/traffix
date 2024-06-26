@@ -61,3 +61,24 @@
   size: 0
   source: https://store.steampowered.com/app/2183900/Warhammer_40000_Space_Marine_2/
   type: game_release
+- date: 2024-07-02 00:00:00
+  github_issue_id: 16
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2074920/header.jpg
+  name: The First Descendant
+  size: 50
+  source: https://store.steampowered.com/agecheck/app/2074920/
+  type: game_release
+- date: 2024-09-05 00:00:00
+  github_issue_id: 15
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1643320/header.jpg
+  name: 'S.T.A.L.K.E.R. 2: Heart of Chornobyl'
+  size: 150
+  source: https://store.steampowered.com/app/1643320/STALKER_2_Heart_of_Chornobyl/
+  type: game_release
+- date: 2024-08-20 00:00:00
+  github_issue_id: 14
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg
+  name: 'Black Myth: Wukong'
+  size: 130
+  source: https://store.steampowered.com/app/2358720/Black_Myth_Wukong/
+  type: game_release
