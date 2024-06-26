@@ -64,7 +64,7 @@ async def update_event_list_redis(
     logger.info(f"Validating and checking: '{key_normalized}'")
     file_sha = await fetch_latest_commit_sha(datastore_file)
 
-    redis_event_sha = await redis_client.get(f"{key_normalized}_sha")
+    redis_event_sha = await client.get(f"{key_normalized}_sha")
     if redis_event_sha:
         redis_event_sha = redis_event_sha.decode("utf-8")
         if redis_event_sha == file_sha:
