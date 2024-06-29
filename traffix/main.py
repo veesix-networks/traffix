@@ -2,11 +2,12 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+import json
 
 from traffix.config import settings
 from traffix.menu import sidebar_menu
-from traffix.fake_data import FAKE_TOP_EVENTS
 from traffix.dependencies import RedisDep
+from traffix.logic import load_latest_events
 
 app = FastAPI()
 
@@ -30,15 +31,16 @@ async def old(request: Request):
 @app.get("/")
 async def home(request: Request, redis: RedisDep):
     top_50_game_releases = await redis.get("top_50_game_release")
+    github_events = await load_latest_events(redis, limit=10)
 
     context = {
         "appTopNav": 1,
         "appSidebarHide": 1,
         "sidebar_menu": sidebar_menu,
-        "fake_data": FAKE_TOP_EVENTS,
         "top_50_game_releases": top_50_game_releases[:5]
         if top_50_game_releases
         else [],
+        "github_events": github_events,
     }
 
     return templates.TemplateResponse(

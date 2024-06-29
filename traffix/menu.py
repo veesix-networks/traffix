@@ -8,10 +8,30 @@ sidebar_menu = [
         "name": "game_releases",
     },
     {
-        "url": "#",
+        "url": "/game_updates",
         "text": "Game Updates",
         "icon": "bi bi-columns-gap",
         "name": "game_updates",
+    },
+    {
+        "url": "#",
+        "text": "Sport Events",
+        "icon": "bi bi-trophy",
+        "name": "sport_events",
+        "disabled": True,
+    },
+    {
+        "url": "#",
+        "text": "Social Events",
+        "icon": "bi bi-person-bounding-box",
+        "name": "social_events",
+        "disabled": True,
+    },
+    {
+        "url": "#",
+        "text": "New Films / Series",
+        "icon": "bi bi-camera-reels",
+        "name": "films_and_series",
         "disabled": True,
     },
     {

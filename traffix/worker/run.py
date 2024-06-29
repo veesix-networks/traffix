@@ -8,6 +8,7 @@ from aioredis import from_url, Redis
 from structlog import get_logger
 import aiohttp
 import yaml
+import os
 
 from traffix.config import settings
 from traffix.models.events import (
@@ -18,6 +19,48 @@ from traffix.models.events import (
 )
 
 logger = get_logger()
+
+OWNER = "veesix-networks"
+REPO = "traffix"
+EVENTS = {
+    "event_game_release": [],
+    "event_game_update": [],
+}
+
+# GitHub API URL to fetch issues
+GITHUB_API_URL = f"https://api.github.com/repos/{OWNER}/{REPO}/issues"
+
+
+async def fetch_issues(sort_by_date: bool = True):
+    # headers = {"Authorization": f"token {os.getenv('GITHUB_TOKEN')}"}
+    headers = {}
+    all_issues = []
+
+    for label in EVENTS.keys():
+        params = {"labels": label, "state": "all"}
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                GITHUB_API_URL, headers=headers, params=params
+            ) as response:
+                if response.status != 200:
+                    response.raise_for_status()
+
+                issues = await response.json()
+
+        issue_ids = {issue["id"] for issue in all_issues}
+        for issue in issues:
+            if issue["id"] not in issue_ids:
+                all_issues.append(issue)
+
+    if sort_by_date:
+        sorted_objects = sorted(
+            all_issues,
+            key=lambda obj: obj["created_at"],
+            reverse=True,
+        )
+        return sorted_objects
+
+    return all_issues
 
 
 async def fetch_latest_commit_sha(yaml_file: str) -> str:
@@ -113,6 +156,19 @@ async def update_latest_50_event_list_redis(
     return top_50_events
 
 
+async def update_latest_github_events_redis(client: Redis, events: list[dict]) -> None:
+    """Attempts to update Redis with the latest github events.
+
+    Args:
+        client:     Redis Client.
+        events:     List of latest github issues/events.
+    """
+    if not events:
+        return
+
+    await client.set("github_events", json.dumps(events, default=str))
+
+
 async def run_job():
     logger.info("Checking if any redis keys need to be updated...")
 
@@ -135,6 +191,13 @@ async def run_job():
         client, game_releases, EventEnum.game_release
     )
     await update_latest_50_event_list_redis(client, game_updates, EventEnum.game_update)
+
+    # GitHub Issues
+    # Update recent events
+
+    latest_events = await fetch_issues()
+    # sorted_objects = sorted(filtered_objects, key=lambda obj: obj["date"])
+    await update_latest_github_events_redis(client, latest_events)
 
 
 if __name__ == "__main__":

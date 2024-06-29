@@ -6,7 +6,7 @@
         <div class="card-body">
             <!-- BEGIN title -->
             <div class="d-flex fw-bold small mb-3">
-                <span class="flex-grow-1">LATEST EVENTS</span>
+                <span class="flex-grow-1">LATEST GITHUB EVENTS</span>
                 <a href="#" data-toggle="card-expand" class="text-inverse text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
             </div>
             <!-- END title -->
@@ -14,136 +14,38 @@
             <div class="table-responsive">
                 <table class="table table-striped table-borderless mb-2px small text-nowrap">
                     <tbody>
+                        {% for event in github_events %}
+                            {% if event.type == "game_release" %}
                         <tr>
                             <td>
                                 <span class="d-flex align-items-center">
                                     <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>
-                                    Grand Theft Auto: VI
+                                    {{ event.title }}
                                 </span>
                             </td>
-                            <td><small>just now</small></td>
+                            <td><small>{{ event.created_at_human_readable }}</small></td>
                             <td>
-                                <span class="badge d-block bg-theme text-theme-900 rounded-0 pt-5px w-70px" style="min-height: 18px">RELEASE</span>
+                                <span class="badge d-block bg-theme text-theme-900 rounded-2 pt-5px w-70px" style="min-height: 18px">RELEASE</span>
                             </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
+                            <td><a href="https://github.com/veesix-networks/traffix/issues/{{ event.id }}" class="text-decoration-none text-inverse" target="_blank"><i class="bi bi-search"></i></a></td>
                         </tr>
+                            {% endif %}
+                            {% if event.type == "game_update" %}
                         <tr>
                             <td>
                                 <span class="d-flex align-items-center">
                                     <i class="bi bi-circle-fill fs-6px text-inverse-transparent-3 me-2"></i>
-                                    Ghost Recon: Advanced Blabber
+                                    {{ event.title }}
                                 </span>
                             </td>
-                            <td><small>1 min ago</small></td>
+                            <td><small>{{ event.created_at_human_readable }}</small></td>
                             <td>
-                                <span class="badge d-block text-inverse bg-secondary bg-opacity-25 rounded-0 pt-5px w-70px" style="min-height: 18px">RELEASE</span>
+                                <span class="badge d-block text-inverse bg-primary rounded-2 pt-5px w-70px" style="min-height: 18px">UPDATE</span>
                             </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
+                            <td><a href="https://github.com/veesix-networks/traffix/issues/{{ event.id }}" class="text-decoration-none text-inverse" target="_blank"><i class="bi bi-search"></i></a></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-inverse-transparent-3 me-2"></i>
-                                    Call of Duty: Warzone - Chapter 32
-                                </span>
-                            </td>
-                            <td><small>1 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block text-inverse bg-secondary bg-opacity-25 rounded-0 pt-5px w-70px" style="min-height: 18px">UPDATE</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>
-                                    Fortnite v3.0.11 patch
-                                </span>
-                            </td>
-                            <td><small>1 min ago</small></td>
-                            <td>
-                                <span class="badge d-block bg-theme text-theme-900 rounded-0 pt-5px w-70px" style="min-height: 18px">UPDATE</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-inverse text-opacity-25 me-2"></i>
-                                    Blonker Donker 2
-                                </span>
-                            </td>
-                            <td><small>2 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block text-inverse bg-secondary bg-opacity-25 rounded-0 pt-5px w-70px" style="min-height: 18px">RELEASE</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>
-                                    iOS Donkey Patch 33
-                                </span>
-                            </td>
-                            <td><small>2 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block bg-theme text-theme-900 rounded-0 pt-5px w-70px" style="min-height: 18px">UPDATE</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>
-                                    Baby Moose
-                                </span>
-                            </td>
-                            <td><small>5 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block bg-theme text-theme-900 rounded-0 pt-5px w-70px" style="min-height: 18px">SERIES</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-inverse text-opacity-25 me-2"></i>
-                                    Team A vs Team Z - STP League
-                                </span>
-                            </td>
-                            <td><small>5 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block text-inverse bg-secondary bg-opacity-25 rounded-0 pt-5px w-70px" style="min-height: 18px">SPORTS</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-inverse-transparent-3 me-2"></i>
-                                    Windows Thirteen Enterprise Edition Release
-                                </span>
-                            </td>
-                            <td><small>5 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block text-inverse bg-secondary bg-opacity-25 rounded-0 pt-5px w-70px" style="min-height: 18px">RELEASE</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="d-flex align-items-center">
-                                    <i class="bi bi-circle-fill fs-6px text-inverse text-opacity-25 me-2"></i>
-                                    World War 4 - The end
-                                </span>
-                            </td>
-                            <td><small>7 mins ago</small></td>
-                            <td>
-                                <span class="badge d-block text-inverse bg-secondary bg-opacity-25 rounded-0 pt-5px w-70px" style="min-height: 18px">SERIES</span>
-                            </td>
-                            <td><a href="#" class="text-decoration-none text-inverse"><i class="bi bi-search"></i></a></td>
-                        </tr>
+                            {% endif %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

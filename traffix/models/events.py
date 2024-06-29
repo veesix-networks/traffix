@@ -29,3 +29,19 @@ class EventGameUpdate(BaseEvent):
     version: str
     size: Annotated[int, Field(lt=250)]
     source: str
+
+
+class GitHubEventUIEnum(str, Enum):
+    game_release = "Release"
+    game_update = "Update"
+
+
+class GitHubEvent(BaseModel):
+    id: int
+    title: str
+    type: EventEnum
+    user: str
+    created_at: datetime
+    created_at_human_readable: str
+    updated_at: datetime | None = None
+    closed_at: datetime | None = None

@@ -1,35 +1,35 @@
 {% extends 'layouts/base_new.html' %}
 
-{% block title %}Game Releases{% endblock %}
+{% block title %}Game Updates{% endblock %}
 
 {% block content %}
 {% include "fragments/generic_pagination.html" %}
 
-{% if game_releases %}
+{% if game_updates %}
 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-3">
-    {% for game in game_releases %}
+    {% for update in game_updates %}
     <div class="col">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">{{ game.name }} (<a href="https://github.com/veesix-networks/traffix/issues/{{ game.github_issue_id}}" target="_blank">#{{ game.github_issue_id }}</a>)</h5>
+                <h5 class="card-title">{{ update.name }} (<a href="https://github.com/veesix-networks/traffix/issues/{{ update.github_issue_id}}" target="_blank">#{{ update.github_issue_id }}</a>)</h5>
                 <div class="card-text">
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
                                 <th scope="row">Size (estimated)</th>
-                                <td>{% if game.size %}{{ game.size }}GB{% else %}N/A{% endif %}</td>
+                                <td>{% if update.size %}{{ update.size }}GB{% else %}N/A{% endif %}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Release Date (estimated)</th>
-                                <td>{{ game.date }}</td>
+                                <td>{{ update.date }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                {% if game.image %}
+                {% if update.image %}
                 <div class="image-container" style="width: 100%; height: 200px; overflow: hidden; position: relative;">
-                    <a href="{{ game.source }}" target="_blank">
-                        <img src="{{ game.image }}" class="card-img-top" style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <a href="{{ update.source }}" target="_blank">
+                        <img src="{{ update.image }}" class="card-img-top" style="width: 100%; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                     </a>
                 </div>
                 {% endif %}
@@ -49,7 +49,7 @@
     <div class="col">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">TRAFFIX is currently unaware of any game releases in the future...</h5>
+                <h5 class="card-title">TRAFFIX is currently unaware of any game updates being released in the future...</h5>
                 <p>If you would like to contribute to the project, please raise a request on the <a href="https://github.com/veesix-networks/traffix/issues/new/choose" target="_blank">GitHub issues page found here.</a></p>
             </div>
         </div>
