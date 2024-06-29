@@ -12,3 +12,10 @@
   source: https://dev.epicgames.com/documentation/en-us/uefn/30-20-release-notes-in-unreal-editor-for-fortnite
   type: game_update
   version: v30.20
+- date: 2024-10-08 00:00:00
+  github_issue_id: 23
+  name: Diablo IV
+  size: 90
+  source: https://store.steampowered.com/app/3043530/Diablo_IV_Vessel_of_Hatred/
+  type: game_update
+  version: Vessel of Hatred DLC
