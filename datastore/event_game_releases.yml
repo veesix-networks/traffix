@@ -131,3 +131,10 @@
   size: 20
   source: https://store.steampowered.com/app/1268750/Starship_Troopers_Extermination/
   type: game_release
+- date: 2024-10-25 00:00:00
+  github_issue_id: 25
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2933620/header.jpg
+  name: 'Call of Duty: Black Ops 6'
+  size: 300
+  source: https://store.steampowered.com/app/2933620/Call_of_Duty_Black_Ops_6/
+  type: game_release
