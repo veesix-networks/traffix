@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     EVENT_GAME_UPDATES_YAML: str = "event_game_updates.yml"
 
     # REDIS
-    REDIS: RedisDsn = "redis://default:redis@localhost:6379"
+    REDIS: RedisDsn = "redis://default:redis@redis:6379"
 
     # CORs - https://fastapi.tiangolo.com/tutorial/cors/
     CORS_ORIGINS: list[str] = ["http://localhost:3000"]
