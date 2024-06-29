@@ -27,7 +27,7 @@ class EventGameRelease(BaseEvent):
 
 class EventGameUpdate(BaseEvent):
     version: str
-    size: Annotated[int, Field(lt=250)]
+    size: Annotated[int, Field(lt=500)]
     source: str
 
 
