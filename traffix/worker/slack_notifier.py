@@ -12,7 +12,6 @@ from structlog import get_logger
 from slack_sdk.webhook.async_client import AsyncWebhookClient as SlackClient
 from slack_sdk.models.blocks import (
     HeaderBlock,
-    LinkButtonElement,
     DividerBlock,
     ContextBlock,
     MarkdownTextObject,
@@ -21,7 +20,7 @@ from slack_sdk.models.blocks import (
 )
 
 from traffix.config import settings
-from traffix.models.events import BaseEvent, EventGameRelease, EventGameUpdate
+from traffix.models.events import EventGameRelease, EventGameUpdate
 
 logger = get_logger()
 
@@ -51,6 +50,7 @@ async def load_events(
                 continue
 
         events.append(event)
+
     return events
 
 
@@ -66,7 +66,7 @@ async def send_events_slack_released_within_days(
     ]
 
     # Sort events by size in descending order
-    sorted_events = sorted(filtered_events, key=lambda event: event.size, reverse=True)
+    sorted_events = sorted(filtered_events, key=lambda event: event.date)
 
     total_events = 0
     for event in sorted_events:
