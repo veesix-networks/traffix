@@ -82,3 +82,24 @@
   size: 130
   source: https://store.steampowered.com/app/2358720/Black_Myth_Wukong/
   type: game_release
+- date: 2024-07-18 00:00:00
+  github_issue_id: 20
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1857090/header.jpg
+  name: Norland
+  size: 1
+  source: https://store.steampowered.com/app/1857090/Norland
+  type: game_release
+- date: 2024-07-30 00:00:00
+  github_issue_id: 19
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2012510/header.jpg
+  name: Stormgate
+  size: 15
+  source: https://store.steampowered.com/app/2012510/Stormgate
+  type: game_release
+- date: 2024-07-09 00:00:00
+  github_issue_id: 18
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2139460/header.jpg
+  name: Once Human
+  size: 50
+  source: https://store.steampowered.com/app/2139460/Once_Human/
+  type: game_release
