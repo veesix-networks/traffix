@@ -117,3 +117,17 @@
   size: 140
   source: https://store.steampowered.com/app/2649240/FINAL_FANTASY_XIV_Dawntrail/
   type: game_release
+- date: 2024-10-29 00:00:00
+  github_issue_id: 26
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1874000/header.jpg
+  name: 'Life is Strange: Double Exposure'
+  size: 20
+  source: https://store.steampowered.com/app/1874000/Life_is_Strange_Double_Exposure/
+  type: game_release
+- date: 2024-10-11 00:00:00
+  github_issue_id: 24
+  image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1268750/header.jpg
+  name: 'Starship Troopers: Extermination'
+  size: 20
+  source: https://store.steampowered.com/app/1268750/Starship_Troopers_Extermination/
+  type: game_release
