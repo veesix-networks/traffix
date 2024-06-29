@@ -10,14 +10,13 @@ This project will be split into multiple phases during the development, here is 
 3) Integrations with public feeds, the idea here is to build potentially multiple workers (eg. A Steam worker that scrapes the Steam workshop API, and another worker for Microsoft to catch any Windows Updates, etc...), I actually already have a base implementation of a worker (polls Steam workshop API and website similar to SteamDB), the idea is to get it into a state where there is no more manual input (or at least minimum manual input) for new game/updates and other upcoming events, introducing popularity to control the weight (where the event is within the API response/web UI, this will probably just be a path argument in the endpoint to return data in this format, eg. if there is a lot of marketing for a specific game with a lot of social interaction then probably a lot of people will play/download/watch the event)
 
 ## Screenshots
-
-![Home page](docs/img/traffix_home.png)
-
-![Game Releases](docs/img//traffix_game_releases.png)
+<img src="docs/img/traffix_home.png" width="800" alt="Home Page">
+<img src="docs/img/traffix_slack_notification.png" width="800" alt="Slack Notification Example">
+<img src="docs/img/traffix_game_releases.png" width="800" alt="Game Releases">
 
 ## Architecture
 
-![Basic Architecture](docs/img/basic_architecture.png)
+<img src="docs/img/basic_architecture.png" width="800" alt="Basic Architecture">
 
 ## How to contribute a new event
 
